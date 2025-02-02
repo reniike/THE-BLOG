@@ -6,8 +6,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -22,5 +22,5 @@ public class Category extends IdEntity {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<Post> posts;
+    private List<Post> posts = new ArrayList<>();
 }

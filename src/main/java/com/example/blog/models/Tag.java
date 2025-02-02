@@ -6,7 +6,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,6 +24,6 @@ public class Tag extends IdEntity {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private List<Post> posts;
+    private Set<Post> posts = new HashSet<>();
 
 }
