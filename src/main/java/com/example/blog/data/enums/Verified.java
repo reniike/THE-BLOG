@@ -1,4 +1,4 @@
-package com.example.blog.enums;
+package com.example.blog.data.enums;
 
 public enum Verified {
     TRUE, FALSE;

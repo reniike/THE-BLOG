@@ -1,0 +1,16 @@
+package com.example.blog.services;
+
+import com.example.blog.dtos.CategoryDTO;
+import com.example.blog.dtos.requests.CreateCategoryRequest;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface CategoryService {
+
+    List<CategoryDTO> getAllCategories();
+
+    CategoryDTO getCategoryById(UUID id);
+
+    CategoryDTO createCategory(CreateCategoryRequest request);
+}

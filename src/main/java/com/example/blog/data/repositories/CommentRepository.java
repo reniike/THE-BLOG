@@ -1,6 +1,6 @@
-package com.example.blog.repositories;
+package com.example.blog.data.repositories;
 
-import com.example.blog.models.Comment;
+import com.example.blog.data.models.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

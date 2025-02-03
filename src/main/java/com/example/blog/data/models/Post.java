@@ -1,7 +1,7 @@
-package com.example.blog.models;
+package com.example.blog.data.models;
 
-import com.example.blog.enums.PostStatus;
-import com.example.blog.enums.Verified;
+import com.example.blog.data.enums.PostStatus;
+import com.example.blog.data.enums.Verified;
 import jakarta.persistence.*;
 import lombok.*;
 

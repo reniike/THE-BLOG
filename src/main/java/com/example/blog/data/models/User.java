@@ -1,10 +1,7 @@
-package com.example.blog.models;
+package com.example.blog.data.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
