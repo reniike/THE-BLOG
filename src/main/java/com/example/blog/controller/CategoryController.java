@@ -1,6 +1,5 @@
 package com.example.blog.controller;
 
-import com.example.blog.data.repositories.CategoryRepository;
 import com.example.blog.dtos.CategoryDTO;
 import com.example.blog.dtos.requests.CreateCategoryRequest;
 import com.example.blog.services.CategoryService;
