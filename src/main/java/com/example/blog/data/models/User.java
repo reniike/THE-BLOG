@@ -1,5 +1,6 @@
 package com.example.blog.data.models;
 
+import com.example.blog.data.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,4 +21,7 @@ public class User extends IdEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

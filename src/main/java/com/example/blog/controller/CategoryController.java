@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/category")
@@ -26,6 +27,13 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody @Valid CreateCategoryRequest request) {
         return new ResponseEntity<>(service.createCategory(request), HttpStatus.CREATED);
+    }
+
+
+    @DeleteMapping(path = "{/id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable UUID id) {
+        service.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

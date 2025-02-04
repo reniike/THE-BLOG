@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -39,5 +40,14 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = mapper.toCategory(request);
         Category savedCategory = repository.save(category);
         return mapper.toCategoryDTO(savedCategory);
+    }
+
+    @Override
+    public void deleteCategory(UUID id) {
+        Optional<Category> category = repository.findById(id);
+        if (category.isPresent()){
+            if (!category.get().getPosts().isEmpty()) throw new IllegalStateException("Category has posts");
+            repository.deleteById(id);
+        }
     }
 }
