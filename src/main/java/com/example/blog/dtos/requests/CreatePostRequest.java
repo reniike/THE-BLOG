@@ -4,6 +4,7 @@ import com.example.blog.data.enums.PostStatus;
 import lombok.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,9 +17,9 @@ public class CreatePostRequest {
 
     private String content;
 
-    private Long authorId;
+    private UUID authorId;
 
-    private Long categoryId;
+    private UUID categoryId;
 
     private PostStatus status;
 

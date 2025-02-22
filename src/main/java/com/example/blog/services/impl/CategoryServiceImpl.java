@@ -7,6 +7,7 @@ import com.example.blog.dtos.requests.CreateCategoryRequest;
 import com.example.blog.mappers.CategoryMapper;
 import com.example.blog.services.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository repository;
 
+    @Qualifier("categoryMapper")
     private final CategoryMapper mapper;
 
     @Override
@@ -27,11 +29,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categories.stream()
                 .map(mapper::toCategoryDTO)
                 .toList();
-    }
-
-    @Override
-    public CategoryDTO getCategoryById(UUID id) {
-        return null;
     }
 
     @Override
@@ -49,5 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
             if (!category.get().getPosts().isEmpty()) throw new IllegalStateException("Category has posts");
             repository.deleteById(id);
         }
+    }
+
+    @Override
+    public Category findById(UUID categoryId) {
+        return repository.findById(categoryId).orElseThrow(() -> new IllegalArgumentException("Category not found"));
     }
 }

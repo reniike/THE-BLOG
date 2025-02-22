@@ -4,10 +4,13 @@ import com.example.blog.dtos.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @ControllerAdvice
@@ -52,5 +55,24 @@ public class ErrorController {
                 .status(HttpStatus.UNAUTHORIZED.value())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleException(AccessDeniedException ex){
+        log.error(ex.getMessage());
+        ErrorResponse response = ErrorResponse.builder()
+                .message("You must be logged in to perform this action")
+                .status(HttpStatus.FORBIDDEN.value())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorResponse> handleAuthenticationException(AuthenticationException ex) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message("Authentication failed: " + ex.getMessage())
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }

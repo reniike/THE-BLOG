@@ -4,6 +4,8 @@ import com.example.blog.data.enums.PostStatus;
 import com.example.blog.data.enums.Verified;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -51,8 +53,12 @@ public class Post extends IdEntity {
     )
     private Set<Tag> tags = new HashSet<>();
 
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     private LocalDateTime postedOn;
 
+    @Column(nullable = false)
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @PreUpdate
