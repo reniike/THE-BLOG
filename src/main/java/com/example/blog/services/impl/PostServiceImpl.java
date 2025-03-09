@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -57,5 +58,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDTO editPost(UpdatePostRequest request) {
         return null;
+    }
+
+    @Override
+    public void deletePost(UUID id) {
+        postRepository.deleteById(id);
     }
 }

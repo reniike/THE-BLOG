@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,9 @@ public class CategoryController {
         return ResponseEntity.ok().body(service.getAllCategories());
     }
 
+
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody @Valid CreateCategoryRequest request) {
         return new ResponseEntity<>(service.createCategory(request), HttpStatus.CREATED);
     }
@@ -43,6 +46,7 @@ public class CategoryController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable("id") UUID id) {
         service.deleteCategory(id);
         return ResponseEntity.noContent().build();
