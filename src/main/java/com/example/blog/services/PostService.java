@@ -1,5 +1,6 @@
 package com.example.blog.services;
 
+import com.example.blog.data.models.Post;
 import com.example.blog.dtos.PostDTO;
 import com.example.blog.dtos.requests.CreatePostRequest;
 import com.example.blog.dtos.requests.UpdatePostRequest;
@@ -16,4 +17,6 @@ public interface PostService {
     PostDTO editPost(UpdatePostRequest request);
 
     void deletePost(UUID id);
+
+    Post getPost(UUID postId);
 }

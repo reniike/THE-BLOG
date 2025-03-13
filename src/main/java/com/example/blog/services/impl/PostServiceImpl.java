@@ -57,11 +57,17 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO editPost(UpdatePostRequest request) {
+
         return null;
     }
 
     @Override
     public void deletePost(UUID id) {
         postRepository.deleteById(id);
+    }
+
+    @Override
+    public Post getPost(UUID postId) {
+        return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));
     }
 }
