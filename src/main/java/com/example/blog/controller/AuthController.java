@@ -2,6 +2,7 @@ package com.example.blog.controller;
 
 import com.example.blog.dtos.AuthResponse;
 import com.example.blog.dtos.requests.LoginRequest;
+import com.example.blog.dtos.requests.RegisterRequest;
 import com.example.blog.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/v1/auth/login")
+@RequestMapping(path = "/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -20,13 +21,14 @@ public class AuthController {
 
 
     @PostMapping
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        AuthResponse authResponse = authenticationService.register(request);
+        return ResponseEntity.ok(authResponse);
+    }
+
+    @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
-        UserDetails userDetails = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
-        String token = authenticationService.generateToken(userDetails);
-        AuthResponse authResponse = AuthResponse.builder()
-                .token(token)
-                .expiresIn(86400L)
-                .build();
+        AuthResponse authResponse = authenticationService.authenticate(loginRequest);
         return ResponseEntity.ok(authResponse);
     }
 

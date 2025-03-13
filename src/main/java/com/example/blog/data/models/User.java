@@ -13,7 +13,7 @@ import lombok.*;
 @Table(name = "users")
 public class User extends IdEntity {
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
