@@ -57,7 +57,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO editPost(UpdatePostRequest request) {
-
         return null;
     }
 
