@@ -6,6 +6,7 @@ import com.example.blog.data.models.User;
 import com.example.blog.data.repositories.CommentRepository;
 import com.example.blog.dtos.CommentDTO;
 import com.example.blog.dtos.requests.CreateCommentRequest;
+import com.example.blog.dtos.requests.UpdateCommentRequest;
 import com.example.blog.mappers.CommentMapper;
 import com.example.blog.services.CommentService;
 import com.example.blog.services.PostService;
@@ -39,6 +40,27 @@ public class CommentServiceImpl implements CommentService {
                 .post(post)
                 .user(currentUser)
                 .build();
+
+        commentRepository.save(comment);
+
+        return commentMapper.toDto(comment);
+    }
+
+    @Override
+    public CommentDTO updateComment(UpdateCommentRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+        User currentUser = userService.findByEmail(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        
+        Post post = postService.getPost(request.getPostId());
+        Comment comment = commentRepository.findById(request.getCommentId()).orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+
+        if(!comment.getUser().equals(currentUser)) throw new SecurityException("You are not authorized to edit this comment");
+        if(!comment.getPost().equals(post)) throw new IllegalArgumentException("Comment does not belong to this post");
+
+        comment.setComment(request.getComment());
+        comment.setPost(post);
 
         commentRepository.save(comment);
 

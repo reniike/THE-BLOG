@@ -56,6 +56,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public PostDTO editPost(UpdatePostRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
