@@ -57,7 +57,23 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO editPost(UpdatePostRequest request) {
-        return null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+        User currentUser = userService.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        Post post = postRepository.findById(request.getId()).orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        
+        if (!post.getAuthor().equals(currentUser)) {
+            throw new SecurityException("You are not authorized to edit this post");
+        }
+
+        post.setTitle(request.getTitle());
+        post.setContent(request.getContent());
+
+        postRepository.save(post);
+        return postMapper.toDto(post);
     }
 
     @Override
