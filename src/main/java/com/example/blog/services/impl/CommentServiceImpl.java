@@ -13,6 +13,7 @@ import com.example.blog.services.PostService;
 import com.example.blog.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public CommentDTO createComment(CreateCommentRequest request) {
         User currentUser = userService.getCurrentUser();
 
@@ -48,6 +50,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public CommentDTO updateComment(UpdateCommentRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -70,6 +73,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDTO> getAllComments(UUID postId, Pageable pageable) {
-        return List.of(commentRepository.getAllByPost_Id(postId, pageable));
+        List<Comment> comments = commentRepository.getAllByPost_Id(postId, pageable);
+        return comments.stream().map(commentMapper::toDto).toList();
     }
 }

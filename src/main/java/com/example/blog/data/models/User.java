@@ -24,4 +24,5 @@ public class User extends IdEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
 }

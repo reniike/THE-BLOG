@@ -19,8 +19,10 @@ public class BlogUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        String roleName = (user.getRole() != null) ? user.getRole().name() : "USER";
+        return List.of(new SimpleGrantedAuthority("ROLE_" + roleName));
     }
+
 
     @Override
     public String getPassword() {

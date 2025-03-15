@@ -32,7 +32,8 @@ public class CommentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CommentDTO>> getAllComments(@RequestParam(required = false) UUID postId, Pageable pageable){
+    public ResponseEntity<List<CommentDTO>> getAllComments(@RequestParam UUID postId, Pageable pageable){
         return new ResponseEntity<>(commentService.getAllComments(postId, pageable), HttpStatus.OK);
     }
+
 }
