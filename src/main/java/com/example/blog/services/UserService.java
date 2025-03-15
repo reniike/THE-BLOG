@@ -7,6 +7,8 @@ import java.util.UUID;
 
 public interface UserService {
 
+    User getCurrentUser();
+
     Optional<User> findByEmail(String username);
 
     User findById(UUID authorId);

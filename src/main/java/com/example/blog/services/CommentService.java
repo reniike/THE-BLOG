@@ -3,12 +3,16 @@ package com.example.blog.services;
 import com.example.blog.dtos.CommentDTO;
 import com.example.blog.dtos.requests.CreateCommentRequest;
 import com.example.blog.dtos.requests.UpdateCommentRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface CommentService {
 
     CommentDTO createComment(CreateCommentRequest request);
 
     CommentDTO updateComment(UpdateCommentRequest request);
+
+    List<CommentDTO> getAllComments(UUID postId, Pageable pageable);
 }

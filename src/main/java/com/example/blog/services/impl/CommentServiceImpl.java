@@ -12,9 +12,13 @@ import com.example.blog.services.CommentService;
 import com.example.blog.services.PostService;
 import com.example.blog.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -28,10 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO createComment(CreateCommentRequest request) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        String username = auth.getName();
-        User currentUser = userService.findByEmail(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User currentUser = userService.getCurrentUser();
 
         Post post = postService.getPost(request.getPostId());
 
@@ -65,5 +66,10 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
 
         return commentMapper.toDto(comment);
+    }
+
+    @Override
+    public List<CommentDTO> getAllComments(UUID postId, Pageable pageable) {
+        return List.of(commentRepository.getAllByPost_Id(postId, pageable));
     }
 }
