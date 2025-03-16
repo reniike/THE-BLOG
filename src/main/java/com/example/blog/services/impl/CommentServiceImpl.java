@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 
 @Service
@@ -72,7 +72,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getAllComments(UUID postId, Pageable pageable) {
+    public List<CommentDTO> getAllComments(Long postId, Pageable pageable) {
         List<Comment> comments = commentRepository.getAllByPost_Id(postId, pageable);
         return comments.stream().map(commentMapper::toDto).toList();
     }

@@ -3,7 +3,7 @@ package com.example.blog.data.repositories;
 import com.example.blog.data.models.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
+import java.lang.Long;
 
-public interface SubscriptionRepository extends JpaRepository<Subscription, UUID> {
+public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
 }

@@ -3,17 +3,17 @@ package com.example.blog.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.lang.Long;
 
 @Getter
 @Setter
 public class CommentDTO {
 
-    private UUID id;
+    private Long id;
 
-    private UUID postId;
+    private Long postId;
 
-    private UUID userId;
+    private Long userId;
 
     private String comment;
 }

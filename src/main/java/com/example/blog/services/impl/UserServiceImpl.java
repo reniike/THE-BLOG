@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
+import java.lang.Long;
 
 @Service
 @Slf4j
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(UUID authorId) {
+    public User findById(Long authorId) {
         return userRepository.findById(authorId).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }

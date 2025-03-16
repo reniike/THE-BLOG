@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 @RestController
 @RequestMapping(path = "/api/v1/comments")
@@ -32,7 +32,7 @@ public class CommentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CommentDTO>> getAllComments(@RequestParam UUID postId, Pageable pageable){
+    public ResponseEntity<List<CommentDTO>> getAllComments(@RequestParam Long postId, Pageable pageable){
         return new ResponseEntity<>(commentService.getAllComments(postId, pageable), HttpStatus.OK);
     }
 

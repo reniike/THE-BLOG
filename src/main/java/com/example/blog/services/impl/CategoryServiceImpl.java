@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.lang.Long;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(UUID id) {
+    public void deleteCategory(Long id) {
         Optional<Category> category = repository.findById(id);
         if (category.isPresent()){
             if (!category.get().getPosts().isEmpty()) throw new IllegalStateException("Category has posts");
@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(UUID categoryId) {
+    public Category findById(Long categoryId) {
         return repository.findById(categoryId).orElseThrow(() -> new IllegalArgumentException("Category not found"));
     }
 }

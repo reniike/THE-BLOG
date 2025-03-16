@@ -6,7 +6,7 @@ import com.example.blog.dtos.requests.CreatePostRequest;
 import com.example.blog.dtos.requests.UpdatePostRequest;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 public interface PostService {
 
@@ -16,7 +16,7 @@ public interface PostService {
 
     PostDTO editPost(UpdatePostRequest request);
 
-    void deletePost(UUID id);
+    void deletePost(Long id);
 
-    Post getPost(UUID postId);
+    Post getPost(Long postId);
 }

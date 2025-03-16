@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 @Getter
 @RequiredArgsConstructor
@@ -19,8 +19,7 @@ public class BlogUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roleName = (user.getRole() != null) ? user.getRole().name() : "USER";
-        return List.of(new SimpleGrantedAuthority("ROLE_" + roleName));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
     }
 
 
@@ -54,7 +53,7 @@ public class BlogUserDetails implements UserDetails {
         return true;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return user.getId();
     }
 }

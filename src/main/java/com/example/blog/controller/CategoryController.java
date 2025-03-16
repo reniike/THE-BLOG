@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.Long;;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/category")
@@ -39,7 +39,7 @@ public class CategoryController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<CategoryDTO> getCategory(@PathVariable UUID id) {
+    public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long id) {
         Category category = service.findById(id);
         CategoryDTO categoryDTO = mapper.toCategoryDTO(category);
         return new ResponseEntity<>(categoryDTO, HttpStatus.OK);
@@ -47,7 +47,7 @@ public class CategoryController {
 
     @DeleteMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteCategory(@PathVariable("id") UUID id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
         service.deleteCategory(id);
         return ResponseEntity.noContent().build();
     }

@@ -16,7 +16,7 @@ import org.mapstruct.*;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
-import java.util.UUID;
+import java.lang.Long;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = {TagService.class})
@@ -50,12 +50,12 @@ public interface PostMapper {
         return (int) Math.ceil(wordCount / 200.0);
     }
 
-    default User mapAuthor(UUID authorId, @Context UserService userService) {
+    default User mapAuthor(Long authorId, @Context UserService userService) {
         if (authorId == null) return null;
         return userService.findById(authorId);
     }
 
-    default Category mapCategory(UUID categoryId, @Context CategoryService categoryService) {
+    default Category mapCategory(Long categoryId, @Context CategoryService categoryService) {
         if (categoryId == null) return null;
         return categoryService.findById(categoryId);
     }

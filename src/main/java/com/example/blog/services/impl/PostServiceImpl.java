@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 @Service
 @Slf4j
@@ -78,12 +78,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deletePost(UUID id) {
+    public void deletePost(Long id) {
         postRepository.deleteById(id);
     }
 
     @Override
-    public Post getPost(UUID postId) {
+    public Post getPost(Long postId) {
         return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));
     }
 }

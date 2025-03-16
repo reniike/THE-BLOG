@@ -1,5 +1,6 @@
 package com.example.blog.services.impl;
 
+import com.example.blog.data.enums.Role;
 import com.example.blog.data.models.User;
 import com.example.blog.data.repositories.UserRepository;
 import com.example.blog.dtos.AuthResponse;
@@ -11,6 +12,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +28,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserDetailsService userDetailsService;
@@ -70,13 +73,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         if (userRepository.existsByEmailIgnoreCase(request.getEmail())) throw new IllegalArgumentException("Email already exists");
 
+        log.info("1");
         User user = User.builder()
                 .email(request.getEmail())
                 .name(request.getName())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.isAdmin() ? Role.ADMIN: Role.USER)
                 .build();
 
+        log.info("2");
+
         userRepository.save(user);
+
+        log.info("Saved user: {}", user);
+        log.info("User id: {}", user.getId());
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = generateToken(userDetails);

@@ -7,7 +7,7 @@ import com.example.blog.dtos.requests.UpdateCommentRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 public interface CommentService {
  
@@ -16,5 +16,5 @@ public interface CommentService {
 
     CommentDTO updateComment(UpdateCommentRequest request);
 
-    List<CommentDTO> getAllComments(UUID postId, Pageable pageable);
+    List<CommentDTO> getAllComments(Long postId, Pageable pageable);
 }

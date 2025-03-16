@@ -18,4 +18,6 @@ public class RegisterRequest {
 
     @NotBlank
     private String name;
+
+    private boolean admin;
 }

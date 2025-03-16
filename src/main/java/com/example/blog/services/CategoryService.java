@@ -5,7 +5,7 @@ import com.example.blog.dtos.CategoryDTO;
 import com.example.blog.dtos.requests.CreateCategoryRequest;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
 public interface CategoryService {
 
@@ -13,7 +13,7 @@ public interface CategoryService {
 
     CategoryDTO createCategory(CreateCategoryRequest request);
 
-    void deleteCategory(UUID id);
+    void deleteCategory(Long id);
 
-    Category findById(UUID categoryId);
+    Category findById(Long categoryId);
 }

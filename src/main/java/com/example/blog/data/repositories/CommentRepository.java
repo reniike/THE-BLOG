@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.UUID;
+import java.lang.Long;
 
-public interface CommentRepository extends JpaRepository<Comment, UUID> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    List<Comment> getAllByPost_Id(UUID postId, Pageable pageable);
+    List<Comment> getAllByPost_Id(Long postId, Pageable pageable);
 }

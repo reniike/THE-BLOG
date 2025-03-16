@@ -4,6 +4,7 @@ import com.example.blog.data.models.Post;
 import lombok.*;
 
 import java.util.List;
+import java.lang.Long;
 
 @Setter
 @Getter
@@ -11,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class CategoryDTO {
+
+    private Long id;
 
     private String name;
 

@@ -2,7 +2,7 @@ package com.example.blog.dtos.requests;
 
 import lombok.*;
 
-import java.util.UUID;
+import java.lang.Long;
 
 @Getter
 @Setter
@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UpdatePostRequest {
 
-    private UUID id;
+    private Long id;
 
     private String title;
 

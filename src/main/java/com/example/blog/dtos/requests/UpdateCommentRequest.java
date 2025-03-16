@@ -4,16 +4,16 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.lang.Long;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 public class UpdateCommentRequest {
 
-    private UUID commentId;
+    private Long commentId;
 
     private String comment;
 
-    private UUID postId;
+    private Long postId;
 }
