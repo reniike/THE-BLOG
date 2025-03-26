@@ -18,4 +18,10 @@ public class LikeController {
         likeService.like(postId);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping(path = "/{id}")
+    private ResponseEntity<Void> unlike(@PathVariable("id") Long postId){
+        likeService.unlike(postId);
+        return ResponseEntity.noContent().build();
+    }
 }

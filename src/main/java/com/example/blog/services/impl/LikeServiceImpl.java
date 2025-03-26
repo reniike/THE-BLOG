@@ -8,6 +8,8 @@ import com.example.blog.services.LikeService;
 import com.example.blog.services.PostService;
 import com.example.blog.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +21,7 @@ public class LikeServiceImpl implements LikeService {
     private final PostService postService;
 
     private final LikeRepository repository;
+    private final LikeRepository likeRepository;
 
     @Override
     public void like(Long postId) {
@@ -32,4 +35,16 @@ public class LikeServiceImpl implements LikeService {
 
         repository.save(like);
     }
+
+    @Override
+    public void unlike(Long postId) {
+        User user = userService.getCurrentUser();
+        Post post = postService.getPost(postId);
+
+        Like like = repository.findByUserAndPost(user, post).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Like not found"));
+
+        likeRepository.delete(like);
+    }
+
+
 }
