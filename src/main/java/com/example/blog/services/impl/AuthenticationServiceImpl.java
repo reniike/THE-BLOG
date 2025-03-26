@@ -85,7 +85,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         userRepository.save(user);
 
-        log.info("Saved user: {}", user);
+        log.info("Saved user: {}", user.getName());
         log.info("User id: {}", user.getId());
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
