@@ -46,5 +46,10 @@ public class LikeServiceImpl implements LikeService {
         likeRepository.delete(like);
     }
 
+    @Override
+    public Long countLikes(Long postId) {
+        return repository.countByPost_Id(postId);
+    }
+
 
 }
