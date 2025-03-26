@@ -2,6 +2,7 @@ package com.example.blog.services.impl;
 
 import com.example.blog.data.enums.PostStatus;
 import com.example.blog.data.models.Post;
+import com.example.blog.data.models.Tag;
 import com.example.blog.data.models.User;
 import com.example.blog.data.repositories.PostRepository;
 import com.example.blog.dtos.PostDTO;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.lang.Long;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -51,9 +53,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO>  getAllPosts() {
-        return List.of();
+    public List<PostDTO> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        return postMapper.postListToPostDtoList(posts);
     }
+
 
     @Override
     @PreAuthorize("isAuthenticated()")

@@ -15,6 +15,7 @@ import org.mapstruct.*;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.lang.Long;
 import java.util.stream.Collectors;
@@ -27,6 +28,8 @@ public interface PostMapper {
     @Mapping(target = "tags", qualifiedByName = "mapTags")
     @Mapping(target = "status", qualifiedByName = "status")
     PostDTO toDto(Post post);
+
+    List<PostDTO> postListToPostDtoList(List<Post> posts);
 
     @Mapping(target = "verified", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
